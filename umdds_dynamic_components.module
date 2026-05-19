@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Module file for UMD Libraries Dynamic Components.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function umdds_dynamic_components_theme($existing, $type, $theme, $path) {
+  return [
+    'umdds_person_component' => [
+      'template' => 'umdds-person-component',
+      'variables' => [
+        'person_data' => [],
+      ],
+    ],
+  ];
+}

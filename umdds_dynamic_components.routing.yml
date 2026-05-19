@@ -1,0 +1,6 @@
+umdds_dynamic_components.autocomplete.person:
+  path: '/umdds-dynamic-components/autocomplete/person'
+  defaults:
+    _controller: '\Drupal\umdds_dynamic_components\Controller\AutocompleteController::personAutocomplete'
+  requirements:
+    _access: 'TRUE'

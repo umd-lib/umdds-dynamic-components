@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Template for rendering the UMD Libraries Person Component.
+ *
+ * Available variables:
+ * - person_data: Array containing:
+ *   - person_name: The person's name
+ *   - person_title: The person's professional title
+ *   - person_phone: The person's phone number
+ *   - person_email: The person's email address
+ *   - person_department: The person's library department
+ *   - person_image: The path to the person's photo (empty if no photo exists)
+ *   - person_image_alt: Alt text for the photo (empty if no photo exists)
+ */
+#}
+
+{% embed "umdlib_umdds:umd-libraries-person" with {
+  "person_name": person_data.person_name,
+  "person_title": person_data.person_title,
+  "person_phone": person_data.person_phone,
+  "person_email": person_data.person_email,
+  "person_department": person_data.person_department,
+  "person_image": person_data.person_image,
+  "person_image_alt": person_data.person_image_alt,
+} %}{% endembed %}

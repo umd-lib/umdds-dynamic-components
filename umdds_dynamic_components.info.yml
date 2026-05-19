@@ -1,0 +1,9 @@
+name: UMD Libraries Dynamic Components
+description: Provides configurable UMD Libraries Design System blocks from Drupal content
+type: module
+core_version_requirement: ^11
+package: UMD Libraries
+version: 1.0.0
+
+dependencies:
+  - drupal:block
