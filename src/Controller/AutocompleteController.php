@@ -51,18 +51,14 @@ class AutocompleteController extends ControllerBase {
   public function personAutocomplete(Request $request) {
     $q = $request->query->get('q', '');
 
-    dsm($q, 'Autocomplete query');
     $matches = [];
 
     if (strlen($q) < 2) {
       return new JsonResponse($matches);
     }
 
-    dsm(strlen($q), 'Query length');
-
     try {
       // Query for Person nodes that match the title
-      dsm('Executing node query', 'Autocomplete query');
       $query = $this->entityTypeManager->getStorage('node')->getQuery();
       $query->accessCheck(FALSE)
         ->condition('type', 'person')
@@ -73,8 +69,6 @@ class AutocompleteController extends ControllerBase {
 
       $nids = $query->execute();
 
-      dsm($nids, 'Matching node IDs');
-
       if (!empty($nids)) {
         $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
 
@@ -84,7 +78,6 @@ class AutocompleteController extends ControllerBase {
             'label' => $node->getTitle(),
           ];
         }
-        dsm($matches, 'Autocomplete matches');
       }
     } catch (\Exception $e) {
       \Drupal::logger('umdds_dynamic_components')->error('Error in person autocomplete: @error', ['@error' => $e->getMessage()]);

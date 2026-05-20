@@ -14,7 +14,6 @@
  *   - person_image_alt: Alt text for the photo (empty if no photo exists)
  */
 #}
-
 {% embed "umdlib_umdds:umd-libraries-person" with {
   "person_name": person_data.person_name,
   "person_title": person_data.person_title,
@@ -23,4 +22,12 @@
   "person_department": person_data.person_department,
   "person_image": person_data.person_image,
   "person_image_alt": person_data.person_image_alt,
-} %}{% endembed %}
+} %}
+  {% block person_name %}{{ person_data.person_name }}{% endblock %}
+  {% block person_title %}{{ person_data.person_title }}{% endblock %}
+  {% block person_phone %}{{ person_data.person_phone }}{% endblock %}
+  {% block person_email %}{{ person_data.person_email }}{% endblock %}
+  {% block person_department %}{{ person_data.person_department }}{% endblock %}
+  {% block person_image %}{{ person_data.person_image }}{% endblock %}
+  {% block person_image_alt %}{{ person_data.person_image_alt }}{% endblock %}
+{% endembed %}
