@@ -1,0 +1,21 @@
+{
+  "name": "umd-lib/umdds_dynamic_components",
+  "description": "UMD Libraries Dynamic Components module providing dynamic blocks and autocomplete functionality.",
+  "type": "drupal-module",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "UMD Libraries"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "drupal/core": "^11.0"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Drupal\\umdds_dynamic_components\\": "src/"
+    }
+  }
+}
