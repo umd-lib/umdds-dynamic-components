@@ -144,6 +144,7 @@ class PersonComponentBlock extends BlockBase implements ContainerFactoryPluginIn
         'person_department' => $person_node->hasField('field_library_department') && !$person_node->get('field_library_department')->isEmpty() ? $person_node->get('field_library_department')->getString() : '',
         'person_image' => '',
         'person_image_alt' => '',
+        'person_profile_link' => $person_node->toUrl()->toString(),
       ];
 
       // Handle the photo field

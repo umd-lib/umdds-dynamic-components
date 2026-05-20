@@ -12,10 +12,11 @@
  *   - person_department: The person's library department
  *   - person_image: The path to the person's photo (empty if no photo exists)
  *   - person_image_alt: Alt text for the photo (empty if no photo exists)
+ *   - person_profile_link: The URL to the person's profile page
  */
 #}
 {% embed "umdlib_umdds:umd-libraries-person" with {
-  "variant": "list",
+  "variant": "card",
   "person_name": person_data.person_name,
   "person_title": person_data.person_title,
   "person_phone": person_data.person_phone,
@@ -23,6 +24,7 @@
   "person_department": person_data.person_department,
   "person_image": person_data.person_image,
   "person_image_alt": person_data.person_image_alt,
+  "person_profile_link": person_data.person_profile_link,
 } %}
   {% block person_name %}{{ person_data.person_name }}{% endblock %}
   {% block person_title %}{{ person_data.person_title }}{% endblock %}
@@ -31,4 +33,5 @@
   {% block person_department %}{{ person_data.person_department }}{% endblock %}
   {% block person_image %}{{ person_data.person_image }}{% endblock %}
   {% block person_image_alt %}{{ person_data.person_image_alt }}{% endblock %}
+  {% block person_profile_link %}{{ person_data.person_profile_link }}{% endblock %}
 {% endembed %}
