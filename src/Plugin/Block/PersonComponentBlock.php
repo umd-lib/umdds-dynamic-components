@@ -156,8 +156,28 @@ class PersonComponentBlock extends BlockBase implements ContainerFactoryPluginIn
       }
       if ($person_node->hasField($image_field) && !$person_node->get($image_field)->isEmpty()) {
         $photo_field = $person_node->get($image_field);
-        if ($photo_field->target_id) {
-          $file = $this->entityTypeManager->getStorage('file')->load($photo_field->target_id);
+        $field_definition = $person_node->getFieldDefinition($image_field);
+        $file_id = NULL;
+        $image_alt = 'Photo of ' . $person_node->getTitle();
+
+        if ($field_definition->getType() === 'image') {
+          $file_id = $photo_field->target_id;
+          $image_alt = $photo_field->alt ?: $image_alt;
+        } elseif ($field_definition->getType() === 'entity_reference' && $field_definition->getSetting('target_type') === 'media') {
+          $media = $this->entityTypeManager->getStorage('media')->load($photo_field->target_id);
+          if ($media) {
+            $media_source = $media->getSource();
+            $source_field_definition = $media_source->getSourceFieldDefinition($media);
+            if ($source_field_definition && $source_field_definition->getType() === 'image') {
+              $file_id = $media_source->getSourceFieldValue($media);
+              $source_field = $media->get($source_field_definition->getName());
+              $image_alt = $source_field->alt ?: $image_alt;
+            }
+          }
+        }
+
+        if ($file_id) {
+          $file = $this->entityTypeManager->getStorage('file')->load($file_id);
 
           if ($file instanceof \Drupal\file\FileInterface) {
             $uri = $file->getFileUri();
@@ -165,7 +185,7 @@ class PersonComponentBlock extends BlockBase implements ContainerFactoryPluginIn
             if ($realpath && is_file($realpath) && filesize($realpath) > 0) {
               $url = $file->createFileUrl(FALSE);
               $component_data['person_image'] = $url;
-              $component_data['person_image_alt'] = 'Photo of ' . $person_node->getTitle();
+              $component_data['person_image_alt'] = $image_alt;
             }
           }
         }
