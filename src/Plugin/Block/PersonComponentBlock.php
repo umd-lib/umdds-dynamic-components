@@ -167,7 +167,8 @@ class PersonComponentBlock extends BlockBase implements ContainerFactoryPluginIn
           $media = $this->entityTypeManager->getStorage('media')->load($photo_field->target_id);
           if ($media) {
             $media_source = $media->getSource();
-            $source_field_definition = $media_source->getSourceFieldDefinition($media->getType());
+            $media_type = $this->entityTypeManager->getStorage('media_type')->load($media->bundle());
+            $source_field_definition = $media_type ? $media_source->getSourceFieldDefinition($media_type) : NULL;
             if ($source_field_definition && $source_field_definition->getType() === 'image') {
               $file_id = $media_source->getSourceFieldValue($media);
               $source_field = $media->get($source_field_definition->getName());
