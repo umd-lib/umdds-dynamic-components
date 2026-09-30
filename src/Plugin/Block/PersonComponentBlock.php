@@ -150,8 +150,12 @@ class PersonComponentBlock extends BlockBase implements ContainerFactoryPluginIn
       // Handle the photo field
       $component_data['person_image'] = false;
       $component_data['person_image_alt'] = false;
-      if ($person_node->hasField('field_photo') && !$person_node->get('field_photo')->isEmpty()) {
-        $photo_field = $person_node->get('field_photo');
+      $image_field = 'field_photo';
+      if ($person_node->hasField('field_portrait')) {
+        $image_field = 'field_portrait';
+      }
+      if ($person_node->hasField($image_field) && !$person_node->get($image_field)->isEmpty()) {
+        $photo_field = $person_node->get($image_field);
         if ($photo_field->target_id) {
           $file = $this->entityTypeManager->getStorage('file')->load($photo_field->target_id);
 
