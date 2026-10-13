@@ -4,7 +4,7 @@ namespace Drupal\umdds_dynamic_components\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 
 /**
  * Builds the search form displayed by SearcherBlock.
@@ -70,7 +70,7 @@ class SearcherForm extends FormBase {
       ? $searcher['empty_query_url']
       : str_replace(self::QUERY_PLACEHOLDER, rawurlencode($keywords), $searcher['query_url']);
 
-    $form_state->setRedirectUrl(Url::fromUri($url));
+    $form_state->setResponse(new TrustedRedirectResponse($url));
   }
 
 }
