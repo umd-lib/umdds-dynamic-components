@@ -35,12 +35,16 @@ class SearcherBlock extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form = parent::blockForm($form, $form_state);
     $searchers = $this->configuration['available_searchers'] ?? [];
+    $form['#attached']['library'][] = 'umdds_dynamic_components/searcher_config';
 
     $form['available_searchers_yaml'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Available Searchers'),
       '#description' => $this->t('Enter searchers as YAML with a top-level "searchers" list. Each searcher must have a name, query_url, and empty_query_url.'),
       '#default_value' => $searchers ? Yaml::encode(['searchers' => $searchers]) : '',
+      '#attributes' => [
+        'class' => ['umdds-searchers-yaml'],
+      ],
       '#required' => TRUE,
       '#element_validate' => [[$this, 'validateAvailableSearchers']],
     ];

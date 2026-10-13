@@ -1,0 +1,4 @@
+searcher_config:
+  css:
+    theme:
+      css/searcher-config.css: {}
