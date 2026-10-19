@@ -8,6 +8,7 @@ Libraries Person web component.
 ## Features
 
 - **Person Component Block**: Displays Person content with autocomplete search
+- **Searcher Block**: Provides a search form that redirects to a selected search service
 - **Autocomplete Search**: Search and select Person content by name
 - **Field Mapping**: Automatically maps Drupal Person content fields to the
 Person component:
@@ -42,6 +43,27 @@ Person component:
    ```
 
 ## Usage
+
+### Creating a Searcher Block
+
+1. Go to **Structure > Block Layout** in Drupal
+2. Click "Place block" in the region where you want the search form
+3. Search for and select "UMD Libraries Searcher"
+4. Enter the available searchers in the **Available Searchers** YAML field. Use the literal `[PLACEHOLDER]` token in each `query_url` where submitted search terms should go, and set **Placeholder** to the hint displayed inside the search box (for example, `Enter your search terms here`):
+
+   ```yaml
+   searchers:
+     - name: Searcher 1
+       query_url: https://searcher1/with/query?q=[PLACEHOLDER]
+       empty_query_url: https://searcher1/without/query
+     - name: Searcher 2
+       query_url: https://searcher2/with/query?q=[PLACEHOLDER]
+       empty_query_url: https://searcher2/without/query
+   ```
+
+5. Save the configuration. The YAML must contain at least one searcher, and each searcher must have a name and valid absolute HTTP(S) URLs.
+
+The block displays a searcher selector, keyword search field, and submit button. The **Placeholder** field controls only the hint shown in the empty search field; it is not used in the URLs. Submitting keywords redirects to the selected searcher's `query_url` with the literal `[PLACEHOLDER]` token replaced by URL-encoded terms. Submitting an empty search redirects to its `empty_query_url`.
 
 ### Creating a Person Block
 
